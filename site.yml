@@ -32,3 +32,11 @@
         state: started
         image: "wurstmeister/kafka"
         pull: true
+        
+    - name: Copy docker settings to remote
+      copy:
+        src: docker-compose.yml
+        dest: /tmp/docker-compose.yml
+        owner: root
+        group: root
+        mode: 0400
