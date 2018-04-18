@@ -3,8 +3,17 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        echo 'Test'
-        ansiblePlaybook 'runbuild'
+        ws(dir: 'build') {
+          readFile 'build.sh'
+          pwd()
+          writeFile(file: 'build.sh', text: 'woot')
+        }
+
+      }
+    }
+    stage('After') {
+      steps {
+        readFile 'build.sh'
       }
     }
   }
