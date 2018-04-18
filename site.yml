@@ -25,14 +25,7 @@
       - setuptools
       - six
       - docker-py
-
-    - name: Ensure container is running
-      docker_container:
-        name: kafka
-        state: started
-        image: "wurstmeister/kafka"
-        pull: true
-        
+       
     - name: Copy docker settings to remote
       copy:
         src: docker-compose.yml
