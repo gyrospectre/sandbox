@@ -33,6 +33,9 @@
         owner: root
         group: root
         mode: 0400
-        
-    - name: Grab IP to advertise
-      shell: export KAFKA_ADVERTISED_HOST_NAME=`ip route show | egrep -v "linkdown|default" | grep -oE '[^ ]+[ ]+$'`
+
+    - name: Run the service defined in docker-compose.yml
+      docker_service:
+        project_src: /tmp
+      environment:
+        KAFKA_ADVERTISED_HOST_NAME: "{{inventory_hostname}}"
