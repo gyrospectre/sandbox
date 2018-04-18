@@ -4,7 +4,7 @@ pipeline {
     stage('Build') {
       steps {
         echo 'Test'
-        sshPublisher(alwaysPublishFromMaster: true)
+        ansiblePlaybook 'runbuild'
       }
     }
   }
