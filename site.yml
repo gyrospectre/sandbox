@@ -25,6 +25,7 @@
       - setuptools
       - six
       - docker-py
+      - docker-compose
        
     - name: Copy docker settings to remote
       copy:
