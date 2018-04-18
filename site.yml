@@ -1,0 +1,34 @@
+---
+- name: "Bootstrap Kafka server(s)"
+  hosts: "kafka-servers"
+  become: True
+
+  roles:
+    - { role: "nickjj.docker", tags: "docker" }
+
+- name: "Deploy Kafka container"
+  hosts: "kafka-servers"
+  become: True
+
+  tasks:
+    - name: Install pip
+      apt:
+        name: "python-pip"
+        state: "present"
+        update_cache: True
+        install_recommends: False
+
+    - name: Install Docker-py
+      pip:
+        name: "{{ item }}"
+      with_items:
+      - setuptools
+      - six
+      - docker-py
+
+    - name: Ensure container is running
+      docker_container:
+        name: kafka
+        state: started
+        image: "wurstmeister/kafka"
+        pull: true
