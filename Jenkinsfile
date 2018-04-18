@@ -1,9 +1,9 @@
 pipeline {
   agent any
   stages {
-    stage('After') {
+    stage('Bootstrap Hosts') {
       steps {
-        readFile 'build.sh'
+        ansiblePlaybook(playbook: '/home/billm/site.yml', credentialsId: 'ssh', disableHostKeyChecking: true, inventory: '/home/billm/hosts.yml', sudo: true, sudoUser: 'root')
       }
     }
   }
