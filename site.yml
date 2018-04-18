@@ -40,3 +40,6 @@
         owner: root
         group: root
         mode: 0400
+        
+    - name: Grab IP to advertise
+      shell: export KAFKA_ADVERTISED_HOST_NAME=`ip route show | egrep -v "linkdown|default" | grep -oE '[^ ]+[ ]+$'`
