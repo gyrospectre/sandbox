@@ -1,0 +1,36 @@
+---
+- name: "Bootstrap Nifi server(s)"
+  hosts: "nifi-servers"
+  become: True
+
+  roles:
+    - { role: "nickjj.docker", tags: "docker" }
+
+- name: "Deploy Nifi container"
+  hosts: "nifi-servers"
+  become: True
+
+  tasks:
+    - name: Install pip
+      apt:
+        name: "python-pip"
+        state: "present"
+        update_cache: True
+        install_recommends: False
+
+    - name: Install Docker-py
+      pip:
+        name: "{{ item }}"
+      with_items:
+      - setuptools
+      - six
+      - docker-py
+      - docker-compose==1.9.0
+
+    - name: Pull and run container
+      docker_container:
+        name: nifi
+        state: started
+        image: "apache/nifi"
+        pull: true
+
