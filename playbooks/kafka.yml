@@ -1,5 +1,5 @@
 ---
-- name: "Bootstrap Kafka server(s)"
+- name: "Bootstrap Confluent server(s)"
   hosts: "kafka-servers"
   become: True
 

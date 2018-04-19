@@ -31,6 +31,7 @@
       docker_container:
         name: nifi
         state: started
+        ports: 0.0.0.0:8080
         image: "apache/nifi"
         pull: true
 
