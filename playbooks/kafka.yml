@@ -29,7 +29,7 @@
        
     - name: Copy docker settings to remote
       copy:
-        src: confluent-all/docker-compose.yml
+        src: ../confluent-all/docker-compose.yml
         dest: /tmp/docker-compose.yml
         owner: root
         group: root
