@@ -26,11 +26,20 @@
       - six
       - docker-py
       - docker-compose==1.9.0
-       
+
+    - name: Creates directory
+      file:
+        path: /opt/compose/elastic
+        state: directory
+        owner: root
+        group: root
+        mode: 0640
+        recurse: yes
+
     - name: Copy docker settings to remote
       copy:
         src: ../elasticsearch/docker-compose.yml
-        dest: /tmp/elastic/docker-compose.yml
+        dest: /opt/compose/elastic/docker-compose.yml
         owner: root
         group: root
         mode: 0400
