@@ -1,6 +1,6 @@
 ---
 - name: "Bootstrap Confluent server(s)"
-  hosts: "elastio-servers"
+  hosts: "elastic-servers"
   become: True
 
   roles:
