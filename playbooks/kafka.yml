@@ -46,6 +46,6 @@
 
     - name: Run the service defined in docker-compose.yml
       docker_service:
-        project_src: /tmp
+        project_src: /opt/compose/confluent
       environment:
         KAFKA_ADVERTISED_HOST_NAME: "{{inventory_hostname}}"

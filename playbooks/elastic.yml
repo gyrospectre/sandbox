@@ -46,4 +46,4 @@
 
     - name: Run the service defined in docker-compose.yml
       docker_service:
-        project_src: /tmp/elastic
+        project_src: /opt/compose/elastic
