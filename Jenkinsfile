@@ -13,7 +13,7 @@ pipeline {
     }
     stage('Deploy Elastic') {
       steps {
-        ansiblePlaybook(playbook: 'elasticsearch/elastic.yml', inventory: '/home/billm/hosts.yml', sudo: true, sudoUser: 'root', credentialsId: 'ssh')
+        ansiblePlaybook(playbook: 'playbooks/elastic.yml', inventory: '/home/billm/hosts.yml', sudo: true, sudoUser: 'root', credentialsId: 'ssh')
       }
     }
   }
