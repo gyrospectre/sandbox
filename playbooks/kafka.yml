@@ -42,7 +42,7 @@
         dest: /opt/compose/confluent/docker-compose.yml
         owner: root
         group: root
-        mode: 0400
+        mode: 0640
 
     - name: Run the service defined in docker-compose.yml
       docker_service:
