@@ -33,7 +33,7 @@
         state: directory
         owner: root
         group: root
-        mode: 0640
+        mode: 0644
         recurse: yes
 
     - name: Copy docker settings to remote
@@ -42,7 +42,7 @@
         dest: /opt/compose/confluent/docker-compose.yml
         owner: root
         group: root
-        mode: 0640
+        mode: 0644
 
     - name: Run the service defined in docker-compose.yml
       docker_service:
