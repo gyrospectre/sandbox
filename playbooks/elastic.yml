@@ -1,0 +1,40 @@
+---
+- name: "Bootstrap Confluent server(s)"
+  hosts: "elastio-servers"
+  become: True
+
+  roles:
+    - { role: "nickjj.docker", tags: "docker" }
+
+- name: "Deploy ElasticSearch container"
+  hosts: "elastic-servers"
+  become: True
+
+  tasks:
+    - name: Install pip
+      apt:
+        name: "python-pip"
+        state: "present"
+        update_cache: True
+        install_recommends: False
+
+    - name: Install Docker-py
+      pip:
+        name: "{{ item }}"
+      with_items:
+      - setuptools
+      - six
+      - docker-py
+      - docker-compose==1.9.0
+       
+    - name: Copy docker settings to remote
+      copy:
+        src: ../elasticsearch/docker-compose.yml
+        dest: /tmp/elastic/docker-compose.yml
+        owner: root
+        group: root
+        mode: 0400
+
+    - name: Run the service defined in docker-compose.yml
+      docker_service:
+        project_src: /tmp/elastic
