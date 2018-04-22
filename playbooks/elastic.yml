@@ -44,6 +44,9 @@
         group: root
         mode: 0755
 
+    - name: System tuning
+      command: sysctl -w vm.max_map_count=262144
+
     - name: Run the service defined in docker-compose.yml
       docker_service:
         project_src: /opt/compose/elastic
