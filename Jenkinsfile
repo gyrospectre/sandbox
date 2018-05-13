@@ -25,5 +25,10 @@ pipeline {
         }
       }
     }
+    stage('Deploy Kibana') {
+      steps {
+        ansiblePlaybook(playbook: 'playbooks/kibana.yml', inventory: '/home/billm/hosts.yml', sudo: true, sudoUser: 'root', credentialsId: 'ssh')
+      }
+    }
   }
 }
