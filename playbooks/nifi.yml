@@ -48,18 +48,18 @@
         path: /tmp/flow.xml
         dest: /tmp/flow.xml.gz
 
-   - name: build the image
-     docker_image: >
-       name=nifi
-       tag=configured
-       path=/tmp/
-       state=present
-
-    - name: Pull and run container
-      docker_container:
+    - name: build the image
+      docker_image:
         name: nifi
-        state: started
-        ports: "0.0.0.0:8080:8080"
-        image: "nifi:configured"
-        pull: true
+        tag: configured
+        path: /tmp/
+        state: present
+
+     - name: Pull and run container
+       docker_container:
+         name: nifi
+         state: started
+         ports: "0.0.0.0:8080:8080"
+         image: "nifi:configured"
+         pull: true
 
