@@ -27,11 +27,39 @@
       - docker-py
       - docker-compose==1.9.0
 
+    - name: Copy flow config to remote
+      copy:
+        src: ../nificfg/flow.xml
+        dest: /tmp/flow.xml
+        owner: root
+        group: root
+        mode: 0755
+
+    - name: Copy Dockerfile to remote
+      copy:
+        src: ../nificfg/Dockerfile
+        dest: /tmp/Dockerfile
+        owner: root
+        group: root
+        mode: 0755
+
+    - name: Compress flowfile
+      archive:
+        path: /tmp/flow.xml
+        dest: /tmp/flow.xml.gz
+
+   - name: build the image
+     docker_image: >
+       name=nifi
+       tag=configured
+       path=/tmp/
+       state=present
+
     - name: Pull and run container
       docker_container:
         name: nifi
         state: started
         ports: "0.0.0.0:8080:8080"
-        image: "apache/nifi"
+        image: "nifi:configured"
         pull: true
 
