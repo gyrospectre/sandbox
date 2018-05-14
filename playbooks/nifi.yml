@@ -49,11 +49,7 @@
         dest: /tmp/flow.xml.gz
 
     - name: build the image
-      docker_image:
-        name: nifi
-        tag: configured
-        path: /tmp/
-        state: present
+      command: docker build -t nifi:configured /tmp
 
     - name: Pull and run container
       docker_container:
