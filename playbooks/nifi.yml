@@ -55,11 +55,11 @@
         path: /tmp/
         state: present
 
-     - name: Pull and run container
-       docker_container:
-         name: nifi
-         state: started
-         ports: "0.0.0.0:8080:8080"
-         image: "nifi:configured"
-         pull: true
+    - name: Pull and run container
+      docker_container:
+        name: nifi
+        state: started
+        ports: "0.0.0.0:8080:8080"
+        image: "nifi:configured"
+        pull: true
 
