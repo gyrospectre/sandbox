@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Deploy Confluent') {
       steps {
-        ansiblePlaybook(playbook: 'playbooks/kafka.yml', credentialsId: 'ssh', disableHostKeyChecking: true, inventory: '/home/user/hosts.yml', sudo: true, sudoUser: 'root')
+        ansiblePlaybook(playbook: 'playbooks/kafka.yml', credentialsId: 'ubuntu', disableHostKeyChecking: true, inventory: '/home/user/hosts.yml', sudoUser: 'root')
       }
     }
     stage('Deploy Nifi') {
