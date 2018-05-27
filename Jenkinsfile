@@ -10,7 +10,7 @@ pipeline {
         }
         stage('Deploy Nifi') {
           steps {
-            ansiblePlaybook(playbook: 'playbooks/nifi.yml', credentialsId: 'ssh', sudo: true, sudoUser: 'root')
+            ansiblePlaybook(playbook: 'playbooks/nifi.yml', credentialsId: 'ssh', sudo: true, sudoUser: 'root', inventory: '/home/user/hosts.yml')
           }
         }
       }
