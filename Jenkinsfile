@@ -2,13 +2,17 @@ pipeline {
   agent any
   stages {
     stage('Deploy Confluent') {
-      steps {
-        ansiblePlaybook(playbook: 'playbooks/kafka.yml', credentialsId: 'ubuntu', disableHostKeyChecking: true, inventory: '/home/user/hosts.yml', become: true, becomeUser: 'root')
-      }
-    }
-    stage('Deploy Nifi') {
-      steps {
-        ansiblePlaybook(playbook: 'playbooks/nifi.yml', credentialsId: 'ssh', inventory: '/home/user/hosts.yml', sudo: true, sudoUser: 'root')
+      parallel {
+        stage('Deploy Confluent') {
+          steps {
+            ansiblePlaybook(playbook: 'playbooks/kafka.yml', credentialsId: 'ubuntu', disableHostKeyChecking: true, inventory: '/home/user/hosts.yml', become: true, becomeUser: 'root')
+          }
+        }
+        stage('Deploy Nifi') {
+          steps {
+            ansiblePlaybook(playbook: 'playbooks/nifi.yml', credentialsId: 'ssh', sudo: true, sudoUser: 'root')
+          }
+        }
       }
     }
     stage('Deploy Elastic') {
